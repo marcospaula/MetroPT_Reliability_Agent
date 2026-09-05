@@ -13,5 +13,4 @@ data/raw/
 __pycache__/
 plots/*.png
 vector_db/
-.mcp.json
 traces/

@@ -3,8 +3,8 @@
 A diagnostic and reliability agent for the **Air Production Unit (APU)** of Metro do
 Porto trains, built on the public **MetroPT-3** dataset.
 
-**Status: design checks closed, no code yet.** The data is downloaded and measured,
-the viability gate passed at four failure events, and the topology is built. See [docs/design-sketch-2026-09-05.md](docs/design-sketch-2026-09-05.md) for the design
+**Status: layers 1, 2, 3 and 5 built and served over MCP.** Still missing: the
+document base for retrieval, layer 4. See [docs/design-sketch-2026-09-05.md](docs/design-sketch-2026-09-05.md) for the design
 and [docs/findings-2026-09-05.md](docs/findings-2026-09-05.md) for what the source
 checks returned.
 
@@ -47,6 +47,35 @@ because of its size. See [data/README.md](data/README.md) for how to obtain it.
 | [docs/apu-topology.md](docs/apu-topology.md) + [apu_schematic.svg](docs/apu_schematic.svg) | the unit, its 15 tags and its documented thresholds |
 | [kg/apu_topology.json](kg/apu_topology.json) | the topology, machine readable, every node carrying its provenance |
 | [data/events.csv](data/events.csv) | the life table: four failures and one suspension |
+| [scripts/](scripts/) | the pipeline, and how to run it |
+
+## The agent
+
+`scripts/mcp_server.py` serves seven tools over stdio:
+
+| tool | |
+|---|---|
+| `historian_tags` | the 15 signals, units, what they measure, documented thresholds |
+| `historian_window` | the extent of the data, and how much of the calendar is missing |
+| `historian_get_tag_data` | time series, with optional bucketing |
+| `historian_gaps` | when the machine was off, useful for reconstructing downtime |
+| `events_life_table` | the four reported failures, with the source's own defects marked |
+| `reliability_summary` | rate, interval and trend, on either clock |
+| `kg_component` | what a component is, what it connects to, what watches it |
+
+Two conventions run through all of them. Rates are denominated in **operating time**,
+because a calendar denominator is 22 % optimistic here. And **an event is not an
+anomaly**: the life table holds only what the operator reported, never something
+inferred from the signal.
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python scripts/reliability.py   # writes data/events.csv
+.venv/bin/python scripts/ingest.py        # builds data/metropt.duckdb
+.venv/bin/python scripts/mcp_server.py --selftest
+```
+
+`.mcp.json` registers the server for MCP clients that read it.
 
 ## Headline result
 

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "metropt-apu": {
+      "command": ".venv/bin/python",
+      "args": ["scripts/mcp_server.py"]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+duckdb>=1.0
+pandas>=2.0
+scipy>=1.10
+
+# Pinned below 2.0. The MCP Python SDK changed its server API in 2.x, and an
+# unpinned floor silently installs a version this server cannot run on.
+mcp>=1.0,<2
