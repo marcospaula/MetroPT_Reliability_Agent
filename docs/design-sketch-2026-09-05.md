@@ -44,9 +44,13 @@ the risk and the value.
   a suspension. The unit of analysis is still to be decided: the compressor as a whole,
   or the failure mode (the literature describes air leaks).
 - **Scarce events are the normal case, not the exception.** Seven months of one APU do
-  not produce dozens of failures. That pushes towards Weibayes with an assumed beta,
-  which is exactly the line of `weibayes-zero-failures` and `relengy`. This repository
-  becomes a use case for those two rather than new code.
+  not produce dozens of failures.
+  > **Corrected 06/09 (see findings-2026-09-06.md).** This originally said the scarcity
+  > pushes towards Weibayes. It does not. There is one APU repaired four times, so these
+  > are recurrent events on a single repairable unit, not independent lifetimes, and a
+  > Weibull fit would assume a renewal that a repaired air leak does not license. The
+  > route is: trend test first, then the model. The Laplace statistic is +0.50, so a
+  > homogeneous Poisson process stands and the answer is an MTBF interval, not a beta.
 - **The bridge back to the signal.** The interesting question is not fitting a Weibull.
   It is whether the signal anticipates the event: is there an indicator that separates
   the week before a failure from the rest of the series? If there is, effective age
@@ -85,7 +89,7 @@ synthetic header.
 ## 5. Before writing code
 
 Not a single line before these five items are closed, in order. Item 2 decides whether
-the project exists at all.
+the project exists at all. Progress is tracked in `findings-2026-09-06.md`.
 
 1. **Download and inspect the CSV.** Real column names, units, effective rate, gaps.
    The "7 analogue, 8 digital" split came from a description, not from reading the file.
@@ -93,6 +97,7 @@ the project exists at all.
    what time resolution. **If fewer than three usable events exist, layer 5 does not
    hold** and the project has to be rescoped to detection, which would make it a copy
    of the boiler repository without the new part. This is the stopping point.
+   **Closed 06/09: four events, all air leak. The gate passes.**
 3. **Count the censoring.** How much failure-free operating time the window contains.
 4. **Establish the APU topology.** Compressor, motor, oil separator, dryer, towers,
    intake valves, reservoir. From a public source, not invented.

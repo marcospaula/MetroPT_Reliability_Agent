@@ -4,7 +4,9 @@ A diagnostic and reliability agent for the **Air Production Unit (APU)** of Metr
 Porto trains, built on the public **MetroPT-3** dataset.
 
 **Status: design sketch.** Structure and design only. No data downloaded, no code
-written. See [docs/design-sketch-2026-09-05.md](docs/design-sketch-2026-09-05.md).
+written. See [docs/design-sketch-2026-09-05.md](docs/design-sketch-2026-09-05.md) for the design
+and [docs/findings-2026-09-06.md](docs/findings-2026-09-06.md) for what the source
+checks returned.
 
 ## Origin
 
@@ -25,8 +27,8 @@ to event rather than signal deviation alone.
 | licence | CC BY 4.0 |
 | size | 208 MB, CSV |
 | records | 1,516,948 |
-| signals | 15 (7 analogue, 8 digital) |
-| rate | 1 Hz |
+| signals | 15 (7 analogue, 8 digital), no GPS |
+| rate | 0.1 Hz (not 1 Hz; see docs/findings-2026-09-06.md) |
 | period | Feb to Aug 2020 |
 | citation | Davari N, Veloso B, Ribeiro R, Gama J. MetroPT-3 Dataset. UCI Machine Learning Repository; 2021. |
 
