@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Find the acquisition freezes, which look exactly like a failing compressor.
 
-This exists because of an error. This repository reported the 23-24 June 2020
-excursion, 22 times the baseline load-cycle rate for two days, as the largest
-anomaly in the series and as evidence that the operator's four reports are not an
-exhaustive label set. It is not an anomaly. It is the acquisition standing still.
+The 23-24 June 2020 excursion, 22 times the baseline load-cycle rate for two days,
+reads as the largest anomaly in the series. It is not an anomaly. It is the
+acquisition standing still.
 
 The signature, on 22 Jun 15:06:11 to 25 Jun 05:08:35: TP2, TP3, Reservoirs,
 Motor_current and Oil_temperature each hold ONE value across 18,515 consecutive

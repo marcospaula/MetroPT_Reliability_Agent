@@ -19,7 +19,7 @@ reservoir below the 7 bar floor and activate `LPS`.
 
 Ten blocks over 6.96 days are the logging chain standing still, not the machine. In four
 of them `DV_eletric` toggles on a fixed 40 s / 10 s square wave, which manufactures up to
-63 load cycles per hour out of nothing. `scripts/freeze.py` finds them. An indicator
+63 load cycles per hour out of nothing. `scripts/freeze.py` finds them; `docs/data-quality.md` lists them. An indicator
 computed without masking them ranks the freezes above every real event.
 
 ## What the four reported events show, with the freezes masked (measured)
@@ -45,7 +45,6 @@ indicators, and it is a reported failure.
 duty, the highest in the series, with 1,239 distinct `TP3` values, so the channels were
 live. `TP3` falls to 0.89 bar and `LPS` is active 28.3 minutes. No report covers it.
 
-Treat the four reports as a partial list, not as exhaustive ground truth. But check for
-a freeze before calling anything an episode: this note previously named 23-24 June here,
-and that was the acquisition, not the machine. See
-`docs/correction-freeze-2026-09-05.md`.
+Treat the four reports as a partial list, not as exhaustive ground truth. But **check for
+a freeze before calling anything an episode**: the three largest apparent excursions in
+this dataset are the acquisition standing still, not the machine.

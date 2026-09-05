@@ -3,11 +3,6 @@
 5 September 2026. Built from a published description, not invented, and not taken from
 the boiler repository. The machine-readable form is `kg/apu_topology.json`.
 
-> **Revised the same day**, after the CSV was downloaded and the primary source read.
-> Three claims below were wrong and are corrected in place: H1's meaning and mounting,
-> the existence of a cyclonic separator, and the assertion that three tags were
-> undocumented. See `findings-2026-09-05.md` for what went wrong and why.
-
 ## Sources
 
 **Primary**: `Data Description_Metro.pdf`, shipped inside the UCI zip for MetroPT-3.
@@ -17,13 +12,16 @@ It is not linked from the dataset page, and it is the authority for anything abo
 **Secondary**, for the flow path only: Veloso B, Gama J, Ribeiro RP, Pereira PM.
 *A Benchmark dataset for predictive maintenance*. arXiv:2207.05466v3, 2022.
 
-Where the two disagree, the primary source wins. They do disagree, on H1.
+Where the two disagree, the primary source wins. They do disagree, on **H1**: the 2022
+paper calls it a valve opening above 10.2 bar, while the MetroPT-3 primary source has it
+reading the discharge of the cyclonic separator filter. Sensor definitions do not carry
+over between MetroPT variants as cleanly as the shared tag names suggest.
 
 That paper documents the **2022** MetroPT dataset, not ours. The topology is the same
 physical unit (the APU of a Metro do Porto vehicle) and the sensor definitions carry
 over by name, but **nothing numeric from that paper may be carried into our life
 table**. Its failure dates belong to a different unit-year. See
-`findings-2026-09-05.md`.
+`data-quality.md`.
 
 ## What the APU is
 
@@ -100,10 +98,9 @@ Seven analogue and eight digital, matching the 15 columns of MetroPT-3.
 | Pressure_switch | digital | detects the discharge in the air-drying towers | yes, primary |
 | Caudal_impulses | digital | counts pulses of the air flowing from the APU to the reservoirs | yes, primary |
 
-**All fifteen tags are documented** in the primary source, and no node in the graph is
-inferred any more. The earlier claim that Reservoirs, Pressure Switch and Caudal
-Impulse were undocumented came from treating the dataset page and the 2022 paper as
-the source, when the source was inside the download.
+**All fifteen tags are documented** in the primary source, `Data Description_Metro.pdf`,
+which ships inside the UCI zip and is not linked from the dataset page. No node in the
+graph is inferred.
 
 Tag ids in the JSON are the **exact CSV column names**, including the origin
 misspelling `DV_eletric`.

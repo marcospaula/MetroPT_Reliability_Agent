@@ -146,11 +146,12 @@ def events_life_table() -> str:
                     "under load at 58 % duty, the highest in the series, on live "
                     "channels. It is an anomalous episode, not a failure, and it does "
                     "not enter this table."),
-        "do_not_use": ("23-24 June 2020, once reported here as the largest excursion, "
-                       "is an ACQUISITION FREEZE, not an event: five analogue channels "
-                       "hold one value each across 18,515 samples. See "
-                       "docs/correction-freeze-2026-09-05.md and scripts/freeze.py. Any "
-                       "cycle-based indicator must mask the ten frozen blocks first."),
+        "do_not_use": ("23-24 June 2020 looks like the largest excursion in the data "
+                       "and is an ACQUISITION FREEZE, not an event: five analogue "
+                       "channels hold one value each across 18,515 samples while a "
+                       "digital channel toggles on a fixed 40 s / 10 s square wave. Ten "
+                       "such blocks exist. Any cycle-based indicator must mask them "
+                       "first. See docs/data-quality.md and scripts/freeze.py."),
     }, indent=2, default=str)
 
 
@@ -168,10 +169,9 @@ def reliability_summary(clock: str = "operating") -> str:
                        max(operating_days) AS op FROM historian""")[0]
     T = w["op"] if clock == "operating" else (w["b"] - w["a"]).total_seconds() / 86400
     # Order by the failure instant, never by the value being read. Ordering by
-    # `calendar_days_since_prev` sorts the intervals by LENGTH, so the cumulative
-    # sum is a different process from the one that happened. That bug shipped, and
-    # it produced beta = 0.65 on the calendar clock against 1.68 on the operating
-    # clock, an apparent sign flip that an agent then reported as a finding.
+    # `calendar_days_since_prev` would sort the intervals by LENGTH, and the
+    # cumulative sum would then describe a process that never happened: it flips
+    # the apparent trend without changing a single input.
     col = ("operating_days_from_start" if clock == "operating"
            else "calendar_days_since_prev")
     ev = rows(f"SELECT {col} AS t FROM events WHERE censored = 0 "

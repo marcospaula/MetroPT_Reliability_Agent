@@ -11,12 +11,10 @@ No label is used. The failure dates are held out and only compared at the end.
 Denominators are logged time, never calendar: scripts/exposure.py establishes that
 the gaps are non-operating time.
 
-WARNING, and the reason scripts/freeze.py exists: this script does NOT mask the ten
-acquisition freezes, so its ranking is wrong at the top. Four of those blocks hold a
-40 s / 10 s square wave on DV_eletric that fabricates up to 63 cycles per hour, which
-this script once reported as the largest anomaly in the dataset. Run freeze.py and use
-its mask before trusting any extreme here. Kept unchanged so the error is reproducible;
-see docs/correction-freeze-2026-09-05.md.
+WARNING: this script does NOT mask the ten acquisition freezes, so its ranking is wrong
+at the top. Four of those blocks hold a 40 s / 10 s square wave on DV_eletric that
+fabricates up to 63 cycles per hour, which outranks every real event. Run scripts/
+freeze.py and apply its mask before trusting any extreme here. See docs/data-quality.md.
 
     python3 scripts/cycles.py
 """
