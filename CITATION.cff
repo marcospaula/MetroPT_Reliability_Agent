@@ -1,0 +1,87 @@
+cff-version: 1.2.0
+message: "If you use this analysis or its method, please cite it as below, and cite the MetroPT-3 dataset separately."
+title: "MetroPT Reliability Agent: a life table for a repairable air production unit"
+abstract: >-
+  A reliability analysis of the MetroPT-3 dataset, readings from the Air Production
+  Unit of a Metro do Porto train. Four documented air-leak failures on one repairable
+  unit are treated as a point process rather than as independent lifetimes, on an
+  operating-time clock derived from the logging record: the gaps are shown to be the
+  machine off, not lost telemetry, which moves the failure rate by 22%. No trend is
+  detectable (Laplace U = +0.49; bias-corrected Crow-AMSAA shape 1.26, 90% interval
+  0.57 to 3.26), so the reportable result is a rate with an interval and an explicit
+  negative. The load-cycle indicator anticipates two of the four reports, and fires
+  hardest on a two-day episode that carries no maintenance report at all, so the
+  dataset's four labels are not an exhaustive list of its anomalies.
+type: software
+authors:
+  - family-names: "De Paula"
+    given-names: "Marcos"
+    orcid: "https://orcid.org/0009-0001-9105-6100"
+repository-code: "https://github.com/marcospaula/MetroPT_Reliability_Agent"
+url: "https://github.com/marcospaula/MetroPT_Reliability_Agent"
+license: MIT
+keywords:
+  - reliability engineering
+  - repairable systems
+  - recurrent event analysis
+  - predictive maintenance
+  - point process
+  - Crow-AMSAA
+  - air production unit
+  - reproducible analysis
+references:
+  - type: data
+    title: "MetroPT-3 Dataset"
+    authors:
+      - family-names: "Davari"
+        given-names: "Narjes"
+      - family-names: "Veloso"
+        given-names: "Bruno"
+      - family-names: "Ribeiro"
+        given-names: "Rita P."
+      - family-names: "Gama"
+        given-names: "Joao"
+    year: 2021
+    doi: "10.24432/C5VW3R"
+    license: CC-BY-4.0
+    notes: "UCI Machine Learning Repository. The dataset is not redistributed in this repository."
+  - type: conference-paper
+    title: "Predictive maintenance based on anomaly detection using deep learning for air production unit in the railway industry"
+    authors:
+      - family-names: "Davari"
+        given-names: "Narjes"
+      - family-names: "Veloso"
+        given-names: "Bruno"
+      - family-names: "Ribeiro"
+        given-names: "Rita P."
+      - family-names: "Pereira"
+        given-names: "Pedro M."
+      - family-names: "Gama"
+        given-names: "Joao"
+    collection-title: "2021 IEEE 8th International Conference on Data Science and Advanced Analytics (DSAA)"
+    year: 2021
+    doi: "10.1109/DSAA53316.2021.9564181"
+  - type: article
+    title: "The MetroPT dataset for predictive maintenance"
+    authors:
+      - family-names: "Veloso"
+        given-names: "Bruno"
+      - family-names: "Ribeiro"
+        given-names: "Rita P."
+      - family-names: "Pereira"
+        given-names: "Pedro M."
+      - family-names: "Gama"
+        given-names: "Joao"
+    journal: "Scientific Data"
+    volume: 9
+    year: 2022
+    doi: "10.1038/s41597-022-01877-3"
+    notes: "Source for the APU topology and sensor definitions of the sibling 2022 dataset."
+  - type: software
+    title: "industrial-ai-troubleshooting-agent"
+    authors:
+      - family-names: "Duncan"
+        given-names: "Scott"
+    url: "https://github.com/ScottDuncanAI/industrial-ai-troubleshooting-agent"
+    license: Apache-2.0
+    notes: "Architectural model for the four-layer agent pattern. No code is copied."
