@@ -1,0 +1,6 @@
+event,failure_start,failure_end,maintenance,mode,severity,calendar_days_since_prev,operating_days_since_prev,operating_days_from_start,censored,note
+R1,2020-04-18 00:00,2020-04-18 23:59,,air leak,high stress,77.0,64.65,64.65,0,no maintenance recorded
+R1b,2020-05-29 23:30,2020-05-30 06:00,2020-04-30 12:00,air leak,high stress,41.98,32.37,97.02,0,source numbers this #1 as well; repair date precedes the failure
+R3,2020-06-05 10:00,2020-06-07 14:30,2020-06-08 16:00,air leak,high stress,6.44,5.74,102.77,0,
+R4,2020-07-15 14:30,2020-07-15 19:00,2020-07-16 00:00,air leak,high stress,40.19,32.72,135.49,0,
+SUSP,2020-09-01 03:59:50,,,,,47.56,39.78,175.27,1,window ends with the unit in service; right censored
