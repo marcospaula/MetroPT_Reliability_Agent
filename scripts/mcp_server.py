@@ -29,6 +29,7 @@ from mcp.server.fastmcp import FastMCP
 ROOT = Path(__file__).resolve().parent.parent
 DB = ROOT / "data/metropt.duckdb"
 KG = ROOT / "kg/apu_topology.json"
+KB = ROOT / "kb"
 MAX_ROWS = 3000
 
 mcp = FastMCP("metropt-apu")
@@ -212,11 +213,61 @@ def kg_component(name: str) -> str:
     }, indent=2)
 
 
+@mcp.tool()
+def kb_search(query: str, limit: int = 4) -> str:
+    """Search the note base for what a component is, how the control works, what a
+    failure looks like in this data, and where the data will mislead you.
+
+    Every note is derived and labelled synthetic: no manual or datasheet for this unit
+    has been published. Notes state their sources, and distinguish what is quoted from
+    what this repository measured. Ranking is BM25-ish over sections, so ask in the
+    words the notes would use ("air leak signature", "why the calendar rate is wrong")."""
+    import math
+    import re
+    docs = []
+    for path in sorted(KB.rglob("*.md")):
+        if path.name == "README.md":
+            continue
+        text = path.read_text()
+        head, _, body = text.partition("---\n\n")
+        for chunk in re.split(r"\n(?=## )", body):
+            if chunk.strip():
+                docs.append((str(path.relative_to(ROOT)), chunk.strip()))
+    if not docs:
+        return json.dumps({"error": f"no notes under {KB}"})
+
+    terms = [t for t in re.findall(r"[a-z_0-9]+", query.lower()) if len(t) > 2]
+    tok = [re.findall(r"[a-z_0-9]+", c.lower()) for _, c in docs]
+    N, avg = len(docs), sum(len(t) for t in tok) / len(docs)
+    df = {t: sum(1 for d in tok if t in d) for t in terms}
+    scored = []
+    for i, d in enumerate(tok):
+        sc = 0.0
+        for t in terms:
+            if not df.get(t):
+                continue
+            f = d.count(t)
+            idf = math.log(1 + (N - df[t] + 0.5) / (df[t] + 0.5))
+            sc += idf * f * 2.5 / (f + 1.5 * (0.25 + 0.75 * len(d) / avg))
+        if sc > 0:
+            scored.append((sc, i))
+    scored.sort(reverse=True)
+    if not scored:
+        return json.dumps({"query": query, "hits": 0,
+                           "notes_available": sorted({p for p, _ in docs})})
+    out = [{"source": docs[i][0], "score": round(sc, 2),
+            "section": docs[i][1][:1400]} for sc, i in scored[:limit]]
+    return json.dumps({"query": query, "hits": len(scored), "results": out,
+                       "note": "all sources are derived notes, labelled synthetic"},
+                      indent=2)
+
+
 def selftest():
     print("historian_window:", historian_window()[:120].replace("\n", " "), "...")
     for fn, args in [(historian_tags, ()), (historian_gaps, ()),
                      (events_life_table, ()), (reliability_summary, ()),
                      (kg_component, ("compressor",)),
+                     (kb_search, ("air leak signature load cycle",)),
                      (historian_get_tag_data,
                       (["TP3", "Motor_current"], "2020-07-15 14:00",
                        "2020-07-15 20:00", 10))]:
