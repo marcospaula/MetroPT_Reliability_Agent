@@ -3,8 +3,7 @@
 A diagnostic and reliability agent for the **Air Production Unit (APU)** of Metro do
 Porto trains, built on the public **MetroPT-3** dataset.
 
-**Status: layers 1, 2, 3 and 5 built and served over MCP.** Still missing: the
-document base for retrieval, layer 4. See [docs/design-sketch-2026-09-05.md](docs/design-sketch-2026-09-05.md) for the design
+**Status: all five layers built and served over MCP.** See [docs/design-sketch-2026-09-05.md](docs/design-sketch-2026-09-05.md) for the design
 and [docs/findings-2026-09-05.md](docs/findings-2026-09-05.md) for what the source
 checks returned.
 
@@ -62,6 +61,7 @@ because of its size. See [data/README.md](data/README.md) for how to obtain it.
 | `events_life_table` | the four reported failures, with the source's own defects marked |
 | `reliability_summary` | rate, interval and trend, on either clock |
 | `kg_component` | what a component is, what it connects to, what watches it |
+| `kb_search` | the derived notes: what a leak looks like, where the data misleads |
 
 Two conventions run through all of them. Rates are denominated in **operating time**,
 because a calendar denominator is 22 % optimistic here. And **an event is not an
@@ -76,6 +76,40 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
 `.mcp.json` registers the server for MCP clients that read it.
+
+## Asking it questions
+
+Yes, that is the point of it. Open the repository in an MCP client such as Claude Code;
+`.mcp.json` is picked up automatically, and questions in plain language get answered by
+the tools above. Nothing is precomputed for a fixed set of questions.
+
+```
+> what happened to the compressor before the 15 July failure?
+
+  events_life_table        -> the reported window, 15 Jul 14:30 to 19:00
+  historian_gaps           -> a 14.2 h gap on 14 Jul: the unit was off, not quiet
+  historian_get_tag_data   -> TP3 down to 5.93 bar, load cycles at 5.32/h against a
+                              2.86 baseline, the 8th highest day of 205
+  kb_search "air leak"     -> the signature, and the caveat that two of four reports
+                              show nothing like it
+  kg_component "reservoirs"-> LPS sits here; the leak path to the clients
+```
+
+Questions it answers well: what is this tag, what was happening on a date, when was the
+machine off, how often does it fail, is there a trend, what does the topology say feeds
+what, why does a number in a paper disagree with this repository.
+
+Questions it will push back on: give me a Weibull beta for the APU, what is the
+availability, is the failure rate increasing. In each case the honest answer is an
+interval or a refusal, and the tools return the reason with the number.
+
+Three commands are included for common jobs, in `.claude/commands/`:
+
+| | |
+|---|---|
+| `/apu-status` | orientation: the data, the tags, the reliability position, what is unresolved |
+| `/reliability-report` | the full layer 5 position, both clocks, with the model choice explained |
+| `/investigate` | what the unit was doing over a window you name |
 
 ## Headline result
 
