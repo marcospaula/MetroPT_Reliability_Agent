@@ -4,6 +4,10 @@ data/raw/
 *.duckdb
 *.parquet
 
+# The life table is the deliverable of layer 5, not bulk data: 4 events and one
+# suspension. It is small, it is derived, and it must be diffable.
+!data/events.csv
+
 # Environment and derived artefacts
 .venv/
 __pycache__/
