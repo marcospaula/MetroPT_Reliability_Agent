@@ -11,3 +11,6 @@ Planned order:
 4. `kg.py`          loads kg/apu_topology.json and answers topology queries
                     (the graph itself is already written, by hand, from a cited source)
 5. `mcp_server.py`  exposes historian, events, graph and documents as tools
+
+Already written, because the checks they belong to are closed:
+`exposure.py`, `cycles.py`, `reliability.py`, `schematic.py`.
