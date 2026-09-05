@@ -101,6 +101,10 @@ the project exists at all. Progress is tracked in `findings-2026-09-06.md`.
 3. **Count the censoring.** How much failure-free operating time the window contains.
 4. **Establish the APU topology.** Compressor, motor, oil separator, dryer, towers,
    intake valves, reservoir. From a public source, not invented.
+   **Closed 06/09:** `apu-topology.md` and `kg/apu_topology.json`, 37 nodes and
+   36 edges from arXiv:2207.05466. Five nodes are inferred rather than sourced and
+   are flagged as such. Note there is no oil separator: the source does not describe
+   one, so it is not in the graph.
 5. **Decide the unit of analysis** for the life table: asset or failure mode.
 
 ## 6. Open questions
