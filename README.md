@@ -3,9 +3,7 @@
 A diagnostic and reliability agent for the **Air Production Unit (APU)** of Metro do
 Porto trains, built on the public **MetroPT-3** dataset.
 
-**Status: all five layers built and served over MCP.** See [docs/design-sketch-2026-09-05.md](docs/design-sketch-2026-09-05.md) for the design
-and [docs/findings-2026-09-05.md](docs/findings-2026-09-05.md) for what the source
-checks returned.
+**Status: all five layers built and served over MCP.**
 
 ## Origin
 
@@ -39,11 +37,9 @@ because of its size. See [data/README.md](data/README.md) for how to obtain it.
 
 | | |
 |---|---|
-| [docs/design-sketch-2026-09-05.md](docs/design-sketch-2026-09-05.md) | the design, and the five checks that had to pass before any code |
-| [docs/findings-2026-09-05.md](docs/findings-2026-09-05.md) | what the sources returned, including three errors this repository made and corrected |
-| [docs/findings-exposure-and-cycles.md](docs/findings-exposure-and-cycles.md) | are the logging gaps downtime? does the load cycle shorten before a failure? |
+| [docs/data-quality.md](docs/data-quality.md) | **read first**: the acquisition freezes, the non-operating time, the decimation, and the defects in the source |
 | [docs/layer5-life-table.md](docs/layer5-life-table.md) | **the point of the project**: what four recurrent events can and cannot support |
-| [docs/correction-freeze-2026-09-05.md](docs/correction-freeze-2026-09-05.md) | the repository's largest error, how it was caught, and what it invalidated |
+| [docs/signal-and-events.md](docs/signal-and-events.md) | does the load cycle shorten before a failure? |
 | [docs/apu-topology.md](docs/apu-topology.md) + [apu_schematic.svg](docs/apu_schematic.svg) | the unit, its 15 tags and its documented thresholds |
 | [kg/apu_topology.json](kg/apu_topology.json) | the topology, machine readable, every node carrying its provenance |
 | [data/events.csv](data/events.csv) | the life table: four failures and one suspension |
@@ -125,11 +121,11 @@ days in which the analogue channels hold a single value while a digital channel 
 on a fixed 40 s square wave, fabricate up to 63 load cycles per hour and outrank every
 real event in the data.
 
-That second one is a correction, not a discovery. This repository originally reported
-the largest freeze as its headline anomaly. The error was caught by an agent reading
-these tools, reproduced independently, and is documented in full rather than quietly
-fixed: [docs/correction-freeze-2026-09-05.md](docs/correction-freeze-2026-09-05.md).
-Masked, the top day of the whole series is 15 July 2020, which is a reported failure.
+Unmasked, those freezes are the top three days of the series, ahead of every reported
+failure, and any detector trained on them learns a logger fault as a fault signature.
+Masked, the top day is 15 July 2020, which is a reported failure.
+[docs/data-quality.md](docs/data-quality.md) has the detection criterion and the block
+list.
 
 ## Credit
 

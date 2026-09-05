@@ -14,3 +14,10 @@ __pycache__/
 plots/*.png
 vector_db/
 traces/
+
+# Session working notes: the running log of what we checked, corrected and withdrew
+# while building this. Kept on disk, deliberately not published. The durable technical
+# content lives in docs/data-quality.md and docs/signal-and-events.md.
+docs/correction-*.md
+docs/findings-*.md
+docs/design-sketch-*.md

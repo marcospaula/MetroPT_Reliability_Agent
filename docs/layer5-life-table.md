@@ -16,7 +16,7 @@ not a sample of independent lifetimes. The distinction decides the whole analysi
 
 ## The clock is operating time
 
-`scripts/exposure.py` shows the logging gaps are the machine off, not lost telemetry,
+`docs/data-quality.md` shows the logging gaps are the machine off, not lost telemetry,
 so 37.9 of the 213.2 calendar days are not exposure. The failure instants are mapped
 onto a cumulative operating-time axis before any test runs.
 
@@ -98,11 +98,10 @@ trend over seven months.**
 
 ## Open
 
-- **Corrected.** The 23 to 24 June excursion listed here as a candidate fifth event is
-  an acquisition freeze, not an event: see `correction-freeze-2026-09-05.md`. The
-  genuine unreported episode is 12 March 2020, 11.7 h continuously under load on live
-  channels. It is still not in this life table, because a life table is built from
-  reported failures and repairs. If it were a fifth failure, the rate is understated by
-  25 %.
+- The unreported episode of 12 March 2020, 11.7 h continuously under load on live
+  channels, is not in this life table, because a life table is built from reported
+  failures and repairs. If it were a fifth failure the rate is understated by 25 %.
+  See `signal-and-events.md`. Do not mistake the apparent June excursion for a
+  candidate: it is an acquisition freeze, per `data-quality.md`.
 - R1b's repair date. One character in the source, and it decides whether availability
   can ever be computed from this table.
