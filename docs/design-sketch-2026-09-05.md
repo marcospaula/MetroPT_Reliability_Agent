@@ -45,7 +45,7 @@ the risk and the value.
   or the failure mode (the literature describes air leaks).
 - **Scarce events are the normal case, not the exception.** Seven months of one APU do
   not produce dozens of failures.
-  > **Corrected 06/09 (see findings-2026-09-06.md).** This originally said the scarcity
+  > **Corrected 05/09 (see findings-2026-09-05.md).** This originally said the scarcity
   > pushes towards Weibayes. It does not. There is one APU repaired four times, so these
   > are recurrent events on a single repairable unit, not independent lifetimes, and a
   > Weibull fit would assume a renewal that a repaired air leak does not license. The
@@ -89,7 +89,7 @@ synthetic header.
 ## 5. Before writing code
 
 Not a single line before these five items are closed, in order. Item 2 decides whether
-the project exists at all. Progress is tracked in `findings-2026-09-06.md`.
+the project exists at all. Progress is tracked in `findings-2026-09-05.md`.
 
 1. **Download and inspect the CSV.** Real column names, units, effective rate, gaps.
    The "7 analogue, 8 digital" split came from a description, not from reading the file.
@@ -97,14 +97,15 @@ the project exists at all. Progress is tracked in `findings-2026-09-06.md`.
    what time resolution. **If fewer than three usable events exist, layer 5 does not
    hold** and the project has to be rescoped to detection, which would make it a copy
    of the boiler repository without the new part. This is the stopping point.
-   **Closed 06/09: four events, all air leak. The gate passes.**
+   **Closed 05/09: four events, all air leak. The gate passes.**
 3. **Count the censoring.** How much failure-free operating time the window contains.
 4. **Establish the APU topology.** Compressor, motor, oil separator, dryer, towers,
    intake valves, reservoir. From a public source, not invented.
-   **Closed 06/09:** `apu-topology.md` and `kg/apu_topology.json`, 37 nodes and
-   36 edges from arXiv:2207.05466. Five nodes are inferred rather than sourced and
-   are flagged as such. Note there is no oil separator: the source does not describe
-   one, so it is not in the graph.
+   **Closed 05/09, then repaired the same day:** `apu-topology.md` and
+   `kg/apu_topology.json`, 37 nodes and 38 edges. Built first from arXiv:2207.05466,
+   then corrected against the primary source inside the UCI zip, which disagrees with
+   it on H1 and documents all fifteen tags. No node is inferred. There is no oil
+   separator, but there is a cyclonic separator filter.
 5. **Decide the unit of analysis** for the life table: asset or failure mode.
 
 ## 6. Open questions
