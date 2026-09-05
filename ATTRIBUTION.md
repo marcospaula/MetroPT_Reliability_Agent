@@ -1,5 +1,9 @@
 # Attribution
 
+**Licensing in one line:** the code and documentation in this repository are MIT
+(see `LICENSE`). That does **not** cover the MetroPT-3 dataset, which is not
+redistributed here and carries its own CC BY 4.0 terms.
+
 This repository is analysis built on other people's work. Nothing here would exist
 without the data and the papers below, and none of that data is redistributed in this
 repository: `data/raw/` is git-ignored and `data/README.md` says how to fetch it from
