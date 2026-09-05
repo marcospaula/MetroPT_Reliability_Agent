@@ -9,9 +9,10 @@ abstract: >-
   machine off, not lost telemetry, which moves the failure rate by 22%. No trend is
   detectable (Laplace U = +0.49; bias-corrected Crow-AMSAA shape 1.26, 90% interval
   0.57 to 3.26), so the reportable result is a rate with an interval and an explicit
-  negative. The load-cycle indicator anticipates two of the four reports, and fires
-  hardest on a two-day episode that carries no maintenance report at all, so the
-  dataset's four labels are not an exhaustive list of its anomalies.
+  negative. The load-cycle indicator anticipates one of the four reports clearly, once
+  ten acquisition freezes are masked; unmasked, a stuck digital channel fabricates 63
+  load cycles per hour and outranks every real event, an error this repository made,
+  had caught by an agent reading its own tools, and documents rather than quietly fixed.
 type: software
 authors:
   - family-names: "De Paula"

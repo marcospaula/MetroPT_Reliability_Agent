@@ -98,9 +98,11 @@ trend over seven months.**
 
 ## Open
 
-- The 23 to 24 June excursion, twenty-two times baseline for two days, has no
-  maintenance report. It is not in this life table, because a life table is built from
-  reported failures and repairs. If it was a fifth failure, the rate is understated by
-  25 %. See `findings-exposure-and-cycles.md`.
+- **Corrected.** The 23 to 24 June excursion listed here as a candidate fifth event is
+  an acquisition freeze, not an event: see `correction-freeze-2026-09-05.md`. The
+  genuine unreported episode is 12 March 2020, 11.7 h continuously under load on live
+  channels. It is still not in this life table, because a life table is built from
+  reported failures and repairs. If it were a fifth failure, the rate is understated by
+  25 %.
 - R1b's repair date. One character in the source, and it decides whether availability
   can ever be computed from this table.
