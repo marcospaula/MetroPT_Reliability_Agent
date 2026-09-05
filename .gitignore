@@ -1,0 +1,13 @@
+# Raw data: 208 MB, CC BY 4.0, downloaded from UCI. Kept out of git.
+data/raw/
+*.csv
+*.duckdb
+*.parquet
+
+# Environment and derived artefacts
+.venv/
+__pycache__/
+plots/*.png
+vector_db/
+.mcp.json
+traces/
