@@ -1,19 +1,18 @@
 # MetroPT_Reliability_Agent — repository instructions
 
 A diagnostic and reliability agent for the Metro do Porto APU (MetroPT-3 dataset).
-A method artefact, and a candidate for public release. **Everything in this repository
-is written in English**: code, documentation and commit messages.
+A method artefact, published under MIT. **Everything in this repository is written in
+English**: code, documentation and commit messages.
 
-## Scope and safety
+## Scope
 
-- The data is **CC BY 4.0**: redistribution with attribution is allowed. Credit Davari,
-  Veloso, Ribeiro and Gama, and the DOI, on any figure or post derived from it.
-- None of the data belongs to Marcos and none of it is personal. The investment
-  cockpit's discretion rule does not apply here.
-- **Commit and push only when he asks.** No remote while this is a sketch.
-- Isolated repository, its own git and venv. Do not mix it with
-  `industrial-ai-troubleshooting-agent`, which is a third-party clone with read-only
-  permission.
+- The data is **CC BY 4.0** and is **not redistributed here**. Credit Davari, Veloso,
+  Ribeiro and Gama, and the DOI, on any figure or text derived from it. See
+  ATTRIBUTION.md.
+- The raw CSV lives in `data/raw/`, which is git-ignored. Only derived artefacts small
+  enough to be diffable are tracked, such as `data/events.csv`.
+- This repository has its own git and its own venv. Nothing here depends on a local
+  checkout of another project.
 
 ## Method rules
 
@@ -35,5 +34,6 @@ is written in English**: code, documentation and commit messages.
 
 ## State
 
-Skeleton only. `docs/design-sketch-2026-09-05.md` holds the design and the checks that
-must pass before any code is written.
+The five pre-code checks are closed and layer 5 is built. `docs/` carries the design,
+the source audit, the exposure and cycle analyses, and the life table. Still open: the
+MCP server, the historian database, and the document base in `kb/`.
