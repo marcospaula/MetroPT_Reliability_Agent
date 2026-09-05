@@ -40,5 +40,6 @@ precedes its own failure.
 ### 5. Optional context
 
 If the user wants the signal side, call `kb_search` for "air leak signature" and report
-that the cycle indicator anticipates two of the four events, and fires hardest on an
-episode with no report at all.
+that the cycle indicator anticipates **one** of the four events clearly (R4, ramping to
+7.10 cycles/h in its final six hours), and that ten acquisition freezes must be masked
+first or the indicator ranks a stuck logger above every real event.

@@ -42,8 +42,13 @@ belong in the answer.
 
 ### 4. What is unresolved
 
-Call `events_life_table` and surface the two defects in the source and the warning
-about the unreported 23-24 June episode.
+Call `events_life_table` and surface the two defects in the source, the `do_not_use`
+field about the 23-24 June acquisition freeze, and the genuine unreported episode of
+12 March 2020.
+
+Also state the decimation caveat when reporting `Motor_current`: the documented 9 A
+start level appears in 7 samples out of 1,516,948, because a start transient cannot
+survive the 10:1 decimation. Do not let a reader plan to detect starts.
 
 Close with the one-line position: about one air leak every 44 operating days, between
 19 and 128 at 90 % confidence, no detectable trend, and MTTR not estimable.

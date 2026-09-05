@@ -72,30 +72,32 @@ Bringing the held-out dates back in, the week before each report:
 | #3, 5 Jun | 1.28 to 2.94 | 96 |
 | #4, 15 Jul | 3.03 to 5.32 | **8** |
 
-**Two of four are anticipated, two are not.** With four events that is not a
-demonstration of anything, and it should not be reported as one.
+**WITHDRAWN.** Recomputed with the acquisition freezes masked, it is **one of four**:
+only R4 shows a real approach. R1b's high day is seven days out and the rate *falls*
+toward the event; R1 is unobservable behind a 14.5 h freeze. See
+`correction-freeze-2026-09-05.md`.
 
 The low pressure signal tells the same story with a different split. LPS minutes in the
 +/- 3 day window: #4 has 206.8, #3 has 118.8, while #1 has 14.8 and #1b has 10.0. But
 89 of 205 days carry some LPS activation, so on its own it is not discriminating.
 
-## The finding that was not on the agenda
+## WITHDRAWN: "the finding that was not on the agenda"
 
-**The largest excursion in the whole series has no maintenance report.** On 23 and 24
-June the unit cycles at 63 per hour, twenty-two times baseline, at 80 % duty, for two
-consecutive days, with a run-up on 22 June and a tail on 25 June. Nothing in the
-company's table covers it.
+> This section claimed that the largest excursion in the series, 23-24 June 2020 at 22
+> times baseline, carried no maintenance report, and concluded that the four labels are
+> not exhaustive.
 
-So the four reports are **not a complete list of the anomalies in this dataset**.
-Anyone treating them as exhaustive ground truth will score a correct detection on
-23 June as a false positive. That is a statement about the labels, not about the
-machine, and it is the kind of thing worth knowing before building an evaluation on
-them.
+**The excursion is an acquisition freeze, not an event.** Five analogue channels hold one
+value each across 18,515 consecutive samples while `DV_eletric` toggles on a fixed 40 s /
+10 s square wave, which manufactures the cycles. It repeats on ten blocks over 6.96 days.
 
-The reliability consequence is narrower than it looks: the life table stays at four
-events, because a life table is built from reported failures and repairs, not from
-inferred ones. But the gap between "four reported failures" and "at least five
-anomalous episodes" is exactly the CMMS against on-board data wedge.
+The conclusion happens to survive on other evidence (12 March 2020 is a genuine
+unreported episode on live channels), but the evidence offered for it here was wrong, and
+the error made the method look better than it was. Full account, including what else it
+invalidates and the two errors in the audit that caught it, in
+`correction-freeze-2026-09-05.md`. Detector in `scripts/freeze.py`.
+
+The table above, "two of four anticipated", is also withdrawn: it is **one of four**.
 
 ## Caveats that limit both results
 

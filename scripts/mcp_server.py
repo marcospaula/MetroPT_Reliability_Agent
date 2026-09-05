@@ -142,8 +142,15 @@ def events_life_table() -> str:
             "the 29 May failure records maintenance on 30 April, a month earlier",
         ],
         "warning": ("The four reports are not an exhaustive list of anomalies. The "
-                    "largest load-cycle excursion in the series, 23-24 June 2020 at "
-                    "22x baseline, carries no report."),
+                    "cleanest unreported episode is 12 March 2020: 11.7 h continuously "
+                    "under load at 58 % duty, the highest in the series, on live "
+                    "channels. It is an anomalous episode, not a failure, and it does "
+                    "not enter this table."),
+        "do_not_use": ("23-24 June 2020, once reported here as the largest excursion, "
+                       "is an ACQUISITION FREEZE, not an event: five analogue channels "
+                       "hold one value each across 18,515 samples. See "
+                       "docs/correction-freeze-2026-09-05.md and scripts/freeze.py. Any "
+                       "cycle-based indicator must mask the ten frozen blocks first."),
     }, indent=2, default=str)
 
 
@@ -160,9 +167,15 @@ def reliability_summary(clock: str = "operating") -> str:
     w = rows("""SELECT min(timestamp) AS a, max(timestamp) AS b,
                        max(operating_days) AS op FROM historian""")[0]
     T = w["op"] if clock == "operating" else (w["b"] - w["a"]).total_seconds() / 86400
+    # Order by the failure instant, never by the value being read. Ordering by
+    # `calendar_days_since_prev` sorts the intervals by LENGTH, so the cumulative
+    # sum is a different process from the one that happened. That bug shipped, and
+    # it produced beta = 0.65 on the calendar clock against 1.68 on the operating
+    # clock, an apparent sign flip that an agent then reported as a finding.
     col = ("operating_days_from_start" if clock == "operating"
            else "calendar_days_since_prev")
-    ev = rows(f"SELECT {col} AS t FROM events WHERE censored = 0 ORDER BY t")
+    ev = rows(f"SELECT {col} AS t FROM events WHERE censored = 0 "
+              f"ORDER BY failure_start")
     ts = np.array([e["t"] for e in ev], dtype=float)
     if clock == "calendar":
         ts = np.cumsum(ts)

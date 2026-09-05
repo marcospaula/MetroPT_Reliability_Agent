@@ -7,7 +7,8 @@ Run in this order from the repository root, with the venv:
 | `ingest.py` | raw CSV to `data/metropt.duckdb`: the historian, the gaps, the life table and the tag metadata, with the operating-time clock materialised |
 | `reliability.py` | writes `data/events.csv` and estimates the rate, the trend and what is not estimable |
 | `exposure.py` | shows the logging gaps are the machine off, not lost telemetry |
-| `cycles.py` | tests whether the load cycle shortens before a failure |
+| `cycles.py` | tests whether the load cycle shortens before a failure. **Run `freeze.py` first**: its results are only valid with the frozen blocks masked |
+| `freeze.py` | finds the ten acquisition freezes that fabricate load cycles |
 | `schematic.py` | renders `docs/apu_schematic.svg` from `kg/apu_topology.json` |
 | `mcp_server.py` | serves the historian, life table and topology as MCP tools |
 
